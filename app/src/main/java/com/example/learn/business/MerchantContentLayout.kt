@@ -8,11 +8,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import com.example.learn.R
+import com.example.learn.view.ViewState.stateRefresh
+import com.example.learn.view.ViewState.statesChangeByAnimation
 import com.example.learn.dp
 import com.example.learn.load
-import com.example.learn.view.stateRefresh
-import com.example.learn.view.stateSave
-import com.example.learn.view.statesChangeByAnimation
+import com.example.learn.view.ViewState
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.merchant_content_layout.view.*
 
@@ -33,8 +33,8 @@ class MerchantContentLayout(context: Context, attrs: AttributeSet?) : Constraint
         vTicket1.set(3, 27, "2018.06.12")
         vTicket2.set(5, 40, "2018.06.12")
 
-        vSwitch.setOnClickListener { switch(!isExpanded) }
-        vHide.setOnClickListener { switch(!isExpanded) }
+        vSwitch.setOnClickListener { switchExpanded(!isExpanded) }
+        vHide.setOnClickListener { switchExpanded(!isExpanded) }
     }
 
     private fun animViews(): Array<View> = arrayOf(laySimple, vAvatar, vMerchantName, layTicket, vTicket1, vTicket2, vSwitchIcon)
@@ -43,19 +43,20 @@ class MerchantContentLayout(context: Context, attrs: AttributeSet?) : Constraint
         super.onWindowFocusChanged(hasWindowFocus)
         if (!firstLayout) {
             firstLayout = true
-            laySimple.stateSave(R.id.vs1).a(1F)
-            laySimple.stateSave(R.id.vs2).a(0F)
-            vMerchantName.stateSave(R.id.vs1).a(0F)
-            vMerchantName.stateSave(R.id.vs2).a(1F)
-            layTicket.stateSave(R.id.vs1).mt(dp(15))
-            layTicket.stateSave(R.id.vs2).mt(dp(70))
+            ViewState.stateSave(laySimple, R.id.vs1).a(1F)
+            ViewState.stateSave(laySimple, R.id.vs2).a(0F)
+            ViewState.stateSave(vMerchantName, R.id.vs1).a(0F)
+            ViewState.stateSave(vMerchantName, R.id.vs2).a(1F)
+            ViewState.stateSave(layTicket, R.id.vs1).mt(dp(15))
+            ViewState.stateSave(layTicket, R.id.vs2).mt(dp(70))
 
-            vSwitchIcon.stateSave(R.id.vs1)
-            vSwitchIcon.stateSave(R.id.vs2).r(180F)
 
-            vAvatar.stateSave(R.id.vs1)
+            ViewState.stateSave(vSwitchIcon, R.id.vs1)
+            ViewState.stateSave(vSwitchIcon, R.id.vs2).r(180F)
+
+            ViewState.stateSave(vAvatar, R.id.vs1)
             val tx: Float = ((width - vAvatar.width) / 2 - (vAvatar.layoutParams as MarginLayoutParams).leftMargin).toFloat()
-            vAvatar.stateSave(R.id.vs2).tx(tx).ty(dp(10).toFloat())
+            ViewState.stateSave(vAvatar, R.id.vs2).tx(tx).ty(dp(10).toFloat())
         }
     }
 
@@ -98,10 +99,13 @@ class MerchantContentLayout(context: Context, attrs: AttributeSet?) : Constraint
             transY > dp(140) && transY < dp(230) -> (transY - dp(140)) / dp(90)
             else -> 1F
         }
-        animViews().forEach { it.stateRefresh(R.id.vs1, R.id.vs2, effected) }
+        animViews().forEach {
+
+            stateRefresh(it, R.id.vs1, R.id.vs2, effected)
+        }
     }
 
-    fun switch(expanded: Boolean, byScrollerSlide: Boolean = false) {
+    fun switchExpanded(expanded: Boolean, byScrollerSlide: Boolean = false) {
         if (isExpanded == expanded) {
             return
         }
@@ -112,9 +116,9 @@ class MerchantContentLayout(context: Context, attrs: AttributeSet?) : Constraint
         val start = effected
         val end = if (expanded) 1F else 0F
         statesChangeByAnimation(animViews(), R.id.vs1, R.id.vs2, start, end,
-                null, if (!byScrollerSlide) internalAnimListener else null, 300)
+                null, if (!byScrollerSlide) internalAnimListener else null, 300,0)
 
-        laySettle?.switch(isExpanded)
+        laySettle?.switchExpanded(isExpanded)
     }
 
 

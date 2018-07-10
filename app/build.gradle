@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion ANDROID_SUPPORT_VERSION
@@ -15,9 +15,6 @@ android {
 
         multiDexEnabled true
 
-        ndk {
-            abiFilters 'armeabi'
-        }
     }
     buildTypes {
         release {
@@ -66,6 +63,8 @@ dependencies {
     implementation 'com.oushangfeng:PinnedSectionItemDecoration:1.2.4'
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.hyman:flowlayout-lib:1.1.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 repositories {
     mavenCentral()

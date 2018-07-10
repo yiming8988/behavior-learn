@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.example.learn.*
+import com.example.learn.java.ScrollableViewProvider
 import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration
 import com.oushangfeng.pinnedsectionitemdecoration.utils.FullSpanUtil
 import kotlinx.android.synthetic.main.merchant_page_food_layout.view.*

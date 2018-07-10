@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.example.learn.R
+import com.example.learn.java.ScrollableViewProvider
 import com.example.learn.log
 import kotlinx.android.synthetic.main.merchant_page_cell_layout.view.*
 

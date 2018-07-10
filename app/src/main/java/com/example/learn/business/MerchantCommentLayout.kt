@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.example.learn.R
+import com.example.learn.java.ScrollableViewProvider
 import kotlinx.android.synthetic.main.merchant_page_cell_layout.view.*
 
 class MerchantCommentLayout(context: Context) : FrameLayout(context), ScrollableViewProvider {

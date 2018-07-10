@@ -12,7 +12,6 @@ class MerchantActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.merchant_activity)
         initialView()
-        log("MerchantActivity onCreate")
     }
 
     private fun initialView() {

@@ -9,9 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import com.example.learn.R
 import com.example.learn.dp
-import com.example.learn.view.stateRefresh
-import com.example.learn.view.stateSave
-import com.example.learn.view.statesChangeByAnimation
+import com.example.learn.view.ViewState.*
+
 
 class MerchantSettleLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
     private var firstLayout: Boolean = false
@@ -28,8 +27,8 @@ class MerchantSettleLayout(context: Context, attrs: AttributeSet?) : ConstraintL
         super.onWindowFocusChanged(hasWindowFocus)
         if (!firstLayout) {
             firstLayout = true
-            stateSave(R.id.vs1).a(1F)
-            stateSave(R.id.vs2).a(0F)
+            stateSave(this,R.id.vs1).a(1F)
+            stateSave(this,R.id.vs2).a(0F)
         }
     }
 
@@ -40,10 +39,12 @@ class MerchantSettleLayout(context: Context, attrs: AttributeSet?) : ConstraintL
             transY > dp(110) && transY < dp(140) -> (transY - dp(110)) / dp(30)
             else -> 1F
         }
-        animViews().forEach { it.stateRefresh(R.id.vs1, R.id.vs2, effected) }
+        animViews().forEach {
+            stateRefresh(it,R.id.vs1, R.id.vs2, effected)
+        }
     }
 
-    fun switch(expanded: Boolean) {
+    fun switchExpanded(expanded: Boolean) {
         if (isExpanded == expanded) {
             return
         }
@@ -60,6 +61,6 @@ class MerchantSettleLayout(context: Context, attrs: AttributeSet?) : ConstraintL
             override fun onAnimationEnd(animation: Animator?) {
                 if (isExpanded) visibility = View.INVISIBLE
             }
-        }, 300)
+        }, 300,0)
     }
 }

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/behaviorlearn.iml" filepath="$PROJECT_DIR$/behaviorlearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/behavior-learn.iml" filepath="$PROJECT_DIR$/behavior-learn.iml" />
+      <module fileurl="file://D:\StudioProjects\behavior-learn\behaviorlearn.iml" filepath="D:\StudioProjects\behavior-learn\behaviorlearn.iml" />
     </modules>
   </component>
 </project>
